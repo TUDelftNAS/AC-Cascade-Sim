@@ -5,7 +5,7 @@ function [mpc_array ,island_cont]= Update_case_data_inertia(mpc, Branch_loading)
 %outputs
 %mpc_array: struct data containing the current stage islands
 %islands_cont: 1 or 0 : 1 if islands cont to iterate; 0 if island is dead
-%v2 updated: if there is no bode loss due to link removals, than do not
+%v2 updated: if there is no node loss due to link removals, than do not
 %change the previous generation and load pattern
 
 
@@ -109,7 +109,7 @@ island_cont(1,i)=0;
          B = cumsum(P_max_generators(:,2)); %accum sum starting from the smallest gen
          %if needed load shed is more than the accumgen, kill all
          %generators
-         if needed_load_shed>=B(end)%eger yeterli load shedding yoksa herseyi oldur
+         if needed_load_shed>=B(end)%if there is not enough load shedding, total blackout  
          mpc_array{1,i}.bus(:,3)=0;
          mpc_array{1,i}.bus(:,4)=0;
          island_cont(1,i)=0;
